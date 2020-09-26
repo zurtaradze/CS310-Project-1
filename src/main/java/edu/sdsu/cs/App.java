@@ -1,8 +1,9 @@
 package edu.sdsu.cs;
 
 /**
- * Hello world!
+ * Main Driving Program
  *
+ * Students: Tatia Sebiskveradze, Zurab Kavtaradze
  */
 public class App 
 {
