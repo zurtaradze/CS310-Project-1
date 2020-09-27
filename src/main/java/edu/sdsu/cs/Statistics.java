@@ -8,6 +8,7 @@ import java.util.List;
 class Statistics
 {
     protected void ProcessFile(File file) throws IOException {
+        this.file = file;
         BufferedReader reader = new BufferedReader(new FileReader(file));
         String line;
         do {
@@ -98,7 +99,7 @@ class Statistics
     protected int getInsensitiveCountOfMostFrequentlyOccuringToken() {
         if (!isStandardized) Standardize();
         int count = 0;
-        int occurance = InsensitiveTokens.get(InsensitiveTokens.size() - 1).Count;
+        int occurance = SensitiveTokens.get(SensitiveTokens.size() - 1).Count;
         for (int i = SensitiveTokens.size() - 1; i > 0; i--)
         {
             if (SensitiveTokens.get(i).Count >= occurance)
@@ -122,6 +123,9 @@ class Statistics
             list.add(InsensitiveTokens.get(i));
         return list;
     }
+    protected File getFile() {
+        return file;
+    }
 
     private int LengthOfLongestLine;
     private double AverageLineLength;
@@ -132,6 +136,7 @@ class Statistics
     private int InsensitiveCountOfMostFrequentlyOccuringToken;
     private List<Token> InsensitiveTenMostFrequentlyUsedTokens;
     private List<Token> InsensitiveTenLeastFrequentlyUsedTokens;
+    private File file;
 
     private int totalLineLength;
     private int lineCount;
