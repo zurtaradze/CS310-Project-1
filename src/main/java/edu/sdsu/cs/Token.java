@@ -3,7 +3,7 @@ package edu.sdsu.cs;
 public class Token implements Comparable
 {
     public String Token;
-    public int Count;
+    public Integer Count;
 
     public Token(String token, int count)
     {
@@ -23,5 +23,11 @@ public class Token implements Comparable
     {
         String str = (String)o;
         return Token.equals(str);
+    }
+
+    @Override
+    public String toString()
+    {
+        return Token;
     }
 }

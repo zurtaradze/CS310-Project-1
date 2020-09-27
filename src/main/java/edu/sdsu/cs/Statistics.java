@@ -1,11 +1,12 @@
 package edu.sdsu.cs;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
-public class Statistics
+class Statistics
 {
-    public void ProcessToken(String token)
+    protected void ProcessToken(String token)
     {
         NumberOfAllSpaceDelimitedTokens++;
         if (!InsensitiveTokens.contains(token.toLowerCase()))
@@ -34,7 +35,7 @@ public class Statistics
         }
     }
 
-    public void ProcessLine(String line)
+    protected void ProcessLine(String line)
     {
         totalLineLength += line.length();
         lineCount++;
@@ -48,22 +49,102 @@ public class Statistics
             ProcessToken(token);
     }
 
+
+    // GETTERS
+    protected int getLengthOfLongestLine() {
+        if (!isStandardized) Standardize();
+        return LengthOfLongestLine;
+    }
+    protected double getAverageLineLength() {
+        if (!isStandardized) Standardize();
+        return (double)totalLineLength / lineCount;
+    }
+    protected int getInsensitiveNumberOfSpaceDelimitedTokens() {
+        if (!isStandardized) Standardize();
+        return InsensitiveNumberOfSpaceDelimitedTokens;
+    }
+    protected int getSensitiveNumberOfSpaceDelimitedTokens() {
+        if (!isStandardized) Standardize();
+        return SensitiveNumberOfSpaceDelimitedTokens;
+    }
+    protected int getNumberOfAllSpaceDelimitedTokens() {
+        if (!isStandardized) Standardize();
+        return NumberOfAllSpaceDelimitedTokens;
+    }
+    protected List<Token> getMostFrequentlyOccuringToken() {
+        if (!isStandardized) Standardize();
+        List<Token> tokens = new ArrayList<>();
+        for (int i = SensitiveTokens.size() - 1; i >= 0; i--)
+        {
+            if (tokens.isEmpty())
+                tokens.add(SensitiveTokens.get(i));
+            else if (SensitiveTokens.get(i).Count >= tokens.get(0).Count)
+                tokens.add(SensitiveTokens.get(i));
+            else
+                break;
+        }
+        return tokens;
+    }
+    protected int getInsensitiveCountOfMostFrequentlyOccuringToken() {
+        if (!isStandardized) Standardize();
+        int count = 0;
+        int occurance = InsensitiveTokens.get(InsensitiveTokens.size() - 1).Count;
+        for (int i = SensitiveTokens.size() - 1; i > 0; i--)
+        {
+            if (SensitiveTokens.get(i).Count >= occurance)
+                count++;
+            else
+                break;
+        }
+        return count;
+    }
+    protected List<Token> getInsensitiveTenMostFrequentlyUsedTokens() {
+        if (!isStandardized) Standardize();
+        List<Token> list = new ArrayList<>(10);
+        for (int i = InsensitiveTokens.size() - 1; i > InsensitiveTokens.size() - 11; i--)
+            list.add(InsensitiveTokens.get(i));
+        return list;
+    }
+    protected List<Token> getInsensitiveTenLeastFrequentlyUsedTokens() {
+        if (!isStandardized) Standardize();
+        List<Token> list = new ArrayList<>(10);
+        for (int i = 0; i < 10; i++)
+            list.add(InsensitiveTokens.get(i));
+        return list;
+    }
+
     private int LengthOfLongestLine;
     private double AverageLineLength;
     private int SensitiveNumberOfSpaceDelimitedTokens;
     private int InsensitiveNumberOfSpaceDelimitedTokens;
     private int NumberOfAllSpaceDelimitedTokens;
-    private List<String> MostFrequentlyOccuringToken;
+    private List<Token> MostFrequentlyOccuringToken;
     private int InsensitiveCountOfMostFrequentlyOccuringToken;
     private List<Token> InsensitiveTenMostFrequentlyUsedTokens;
-    private List<Token> SensitiveTenLeastFrequentlyUsedTokens;
+    private List<Token> InsensitiveTenLeastFrequentlyUsedTokens;
 
     private int totalLineLength;
     private int lineCount;
+    private boolean isStandardized;
     List<Token> InsensitiveTokens = new ArrayList<>();
     List<Token>  SensitiveTokens = new ArrayList<>();
 
-    public void Standardize()
+    private void Standardize()
     {
+        InsensitiveTokens.sort(new Comparator<Token>() {
+            @Override
+            public int compare(Token o1, Token o2) {
+                return o1.Count.compareTo(o2.Count);
+            }
+        });
+
+        SensitiveTokens.sort(new Comparator<Token>() {
+            @Override
+            public int compare(Token o1, Token o2) {
+                return o1.Count.compareTo(o2.Count);
+            }
+        });
+
+        isStandardized = true;
     }
 }

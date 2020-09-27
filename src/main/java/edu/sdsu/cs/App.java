@@ -1,6 +1,7 @@
 package edu.sdsu.cs;
 
 import java.io.File;
+import java.util.Queue;
 
 import static edu.sdsu.cs.ServiceProvider.*;
 
@@ -19,5 +20,8 @@ public class App
             handler.Populate(args);
         else
             handler.Populate(DefaultPath);
+
+        while (handler.hasFiles())
+            System.out.println(handler.Dequeue().getPath());
     }
 }
