@@ -34,10 +34,15 @@ public class FileHandler
         {
             File[] files = file.listFiles();
             for (File f : files)
-                Enqueue(f);
+                if (HasDesiredExtension(f))
+                    Enqueue(f);
         }
         else
             Enqueue(file);
+    }
+
+    private boolean HasDesiredExtension(File f) {
+        return  f.getPath().endsWith(".java") || f.getPath().endsWith(".txt");
     }
 
     protected boolean hasFiles()

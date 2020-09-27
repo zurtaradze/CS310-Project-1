@@ -2,13 +2,18 @@ package edu.sdsu.cs;
 
 public class Token implements Comparable
 {
-    public String Token;
-    public Integer Count;
+    protected String Token;
+    protected Integer Count;
 
-    public Token(String token, int count)
+    protected Token(String token, int count)
     {
         Token = token;
         Count = count;
+    }
+
+    protected Token(String token)
+    {
+        Token = token;
     }
 
     @Override
@@ -21,13 +26,13 @@ public class Token implements Comparable
     @Override
     public boolean equals(Object o)
     {
-        String str = (String)o;
-        return Token.equals(str);
+        String str = o.toString();
+        return this.Token.equals(str);
     }
 
     @Override
     public String toString()
     {
-        return Token;
+        return this.Token;
     }
 }

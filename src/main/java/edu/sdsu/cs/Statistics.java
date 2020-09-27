@@ -1,15 +1,25 @@
 package edu.sdsu.cs;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
 class Statistics
 {
-    protected void ProcessToken(String token)
+    protected void ProcessFile(File file) throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        String line;
+        do {
+            line = reader.readLine();
+            if (line == null) break;
+            ProcessLine(line);
+        } while (line != null);
+    }
+    private void ProcessToken(String token)
     {
         NumberOfAllSpaceDelimitedTokens++;
-        if (!InsensitiveTokens.contains(token.toLowerCase()))
+        if (!InsensitiveTokens.contains(new Token(token.toLowerCase())))
         {
             InsensitiveNumberOfSpaceDelimitedTokens++;
             Token tkn = new Token(token.toLowerCase(), 1);
@@ -17,11 +27,11 @@ class Statistics
         }
         else
         {
-            int index = InsensitiveTokens.indexOf(token.toLowerCase());
+            int index = InsensitiveTokens.indexOf(new Token(token.toLowerCase()));
             Token model = InsensitiveTokens.get(index);
             model.Count++;
         }
-        if (!SensitiveTokens.contains(token))
+        if (!SensitiveTokens.contains(new Token(token)))
         {
             SensitiveNumberOfSpaceDelimitedTokens++;
             Token tkn = new Token(token, 1);
@@ -29,13 +39,13 @@ class Statistics
         }
         else
         {
-            int index = SensitiveTokens.indexOf(token);
+            int index = SensitiveTokens.indexOf(new Token(token));
             Token model = SensitiveTokens.get(index);
             model.Count++;
         }
     }
 
-    protected void ProcessLine(String line)
+    private void ProcessLine(String line)
     {
         totalLineLength += line.length();
         lineCount++;
@@ -129,7 +139,7 @@ class Statistics
     List<Token> InsensitiveTokens = new ArrayList<>();
     List<Token>  SensitiveTokens = new ArrayList<>();
 
-    private void Standardize()
+    protected void Standardize()
     {
         InsensitiveTokens.sort(new Comparator<Token>() {
             @Override
