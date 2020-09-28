@@ -18,9 +18,12 @@ class Statistics
             if (line == null) break;
             ProcessLine(line);
         } while (line != null);
+        reader.close();
     }
     private void ProcessToken(String token)
     {
+        if (token.equals(""))
+            return;
         NumberOfAllSpaceDelimitedTokens++;
         if (!InsensitiveTokens.contains(new Token(token.toLowerCase())))
         {
@@ -56,7 +59,7 @@ class Statistics
         if (line.length() > LengthOfLongestLine)
             LengthOfLongestLine = line.length();
 
-        String[] tokens = line.split(" ");
+        String[] tokens = line.split("\\s+");
 
         for (String token : tokens)
             ProcessToken(token);
@@ -100,31 +103,19 @@ class Statistics
     }
     protected int getInsensitiveCountOfMostFrequentlyOccuringToken() {
         if (!isStandardized) Standardize();
-        int count = 0;
-        int occurance = SensitiveTokens.get(SensitiveTokens.size() - 1).Count;
-        for (int i = SensitiveTokens.size() - 1; i > 0; i--)
-        {
-            if (SensitiveTokens.get(i).Count >= occurance)
-                count++;
-            else
-                break;
-        }
-        return count;
+        return InsensitiveTokens.get(InsensitiveTokens.size() - 1).Count;
     }
     protected List<Token> getInsensitiveTenMostFrequentlyUsedTokens() {
         if (!isStandardized) Standardize();
         List<Token> list = new ArrayList<>(10);
         list = InsensitiveTokens.stream().skip(InsensitiveTokens.size() - 10).limit(10).collect(Collectors.toList());
         Collections.reverse(list);
-        //for (int i = InsensitiveTokens.size() - 1; i > InsensitiveTokens.size() - 11; i--)
-        //    list.add(InsensitiveTokens.get(i));
         return list;
     }
     protected List<Token> getInsensitiveTenLeastFrequentlyUsedTokens() {
         if (!isStandardized) Standardize();
         List<Token> list = new ArrayList<>(10);
-        for (int i = 0; i < 10; i++)
-            list.add(InsensitiveTokens.get(i));
+        list = InsensitiveTokens.stream().limit(10).collect(Collectors.toList());
         return list;
     }
     protected File getFile() {
@@ -163,7 +154,6 @@ class Statistics
                 return o1.Count.compareTo(o2.Count);
             }
         });
-
         isStandardized = true;
     }
 }

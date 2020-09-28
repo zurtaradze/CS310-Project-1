@@ -1,7 +1,12 @@
 package edu.sdsu.cs;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.*;
 import java.util.*;
+import java.util.stream.Collectors;
+
+import static edu.sdsu.cs.ServiceProvider.*;
 
 public class FileHandler
 {
@@ -21,30 +26,20 @@ public class FileHandler
         return files.poll();
     }
 
-    protected void Populate(String[] paths)
-    {
+    protected void Populate(String[] paths) throws IOException {
         for (String path : paths)
             Populate(path);
     }
 
-    protected void Populate(String path)
-    {
-        File file = new File(path);
-        if (file.isDirectory())
-        {
-            File[] files = file.listFiles();
-            for (File f : files)
-                if (HasDesiredExtension(f))
-                    Enqueue(f);
-        }
-        else
-            Enqueue(file);
-    }
+    protected void Populate(String path) throws IOException {
+        List<Path> fil = Files.find(Paths.get(path),
+                                    Integer.MAX_VALUE,
+                                    (filePath, fileAttr) -> fileAttr.isRegularFile()).collect(Collectors.toList());
 
-    private boolean HasDesiredExtension(File f) {
-        return  f.getPath().endsWith(".java") || f.getPath().endsWith(".txt");
+        for (Path s : fil)
+            if (HasDesiredExtension(s.toFile()))
+                Enqueue(s.toFile());
     }
-
     protected boolean hasFiles()
     {
         return !files.isEmpty();
