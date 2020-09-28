@@ -1,7 +1,5 @@
 package edu.sdsu.cs;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -12,13 +10,14 @@ import static edu.sdsu.cs.ServiceProvider.*;
  * Main Driving Program
  *
  * Students: Tatia Sebiskveradze, Zurab Kavtaradze
+ * Course: CS310
+ * Date: 09.28.2020
  */
 public class App 
 {
     public static void main( String[] args )
     {
         FileHandler handler = new FileHandler();
-
         try
         {
             if(CheckIfPathIsProvided(args))
@@ -28,7 +27,7 @@ public class App
         }
         catch(Exception ex)
         {
-            //TODO
+            Logger.Log(ex);
         }
 
         Queue<Statistics> stats = new LinkedList<>();
@@ -38,12 +37,11 @@ public class App
             try
             {
                 statistics.ProcessFile(handler.Dequeue());
-                statistics.Standardize();
                 stats.add(statistics);
             }
             catch (IOException ex)
             {
-                // TODO: Log Exception
+                Logger.Log(ex);
             }
         }
 
@@ -56,7 +54,7 @@ public class App
             }
             catch (Exception ex)
             {
-                System.out.println(ex.getMessage());
+                Logger.Log(ex);
             }
         }
     }

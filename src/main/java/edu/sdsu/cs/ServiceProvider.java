@@ -1,10 +1,9 @@
 package edu.sdsu.cs;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.attribute.FileAttribute;
 import java.util.List;
 
+// Author: Tatia Sebiskveradze
 class ServiceProvider
 {
     protected static final String DefaultPath = ".";

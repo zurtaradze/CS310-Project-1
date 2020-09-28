@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import static edu.sdsu.cs.ServiceProvider.*;
 
+// Author: Zurab Kavtaradze
 public class FileHandler
 {
     public Queue<File> getFiles() {

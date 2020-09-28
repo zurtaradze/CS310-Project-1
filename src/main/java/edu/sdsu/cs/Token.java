@@ -1,5 +1,6 @@
 package edu.sdsu.cs;
 
+//Author: Tatia Sebiskveradze
 public class Token implements Comparable
 {
     protected String Token;
