@@ -39,13 +39,17 @@ public class App
                 // TODO: Log Exception
             }
         }
-        Statistics st = stats.poll();
-        try
+
+        while (!stats.isEmpty())
         {
-            WriteToFile(st);
-        }
-        catch (Exception ex)
-        {
+            try
+            {
+                WriteToFile(stats.poll());
+            }
+            catch (Exception ex)
+            {
+                System.out.println(ex.getMessage());
+            }
         }
     }
 }

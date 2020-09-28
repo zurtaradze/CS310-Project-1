@@ -1,0 +1,29 @@
+Length of longest line in file:21
+Average line length:12.50
+Number of unique space-delineated tokens (case-sensitive):15
+Number of unique space-delineated tokens (case-insensitive):14
+Number of all space-delineated tokens in file:19
+Most frequently occurring token(s):[s, zur]
+Count of most frequently occurring token (case-insensitive):4
+10 most frequent tokens with their counts (case-insensitive):
+  1).Token:zur, Count 4
+  2).Token:s, Count 3
+  3).Token:wq, Count 1
+  4).Token:sada, Count 1
+  5).Token:wqe, Count 1
+  6).Token:asdxz, Count 1
+  7).Token:dwqd, Count 1
+  8).Token:sad, Count 1
+  9).Token:kss, Count 1
+  10).Token:ss, Count 1
+10 least frequent tokens with their counts (case-sensitive):
+  1).Token:ssasda, Count 1
+  2).Token:asdw, Count 1
+  3).Token:dqwdqwd, Count 1
+  4).Token:wads, Count 1
+  5).Token:ss, Count 1
+  6).Token:kss, Count 1
+  7).Token:sad, Count 1
+  8).Token:dwqd, Count 1
+  9).Token:asdxz, Count 1
+  10).Token:wqe, Count 1

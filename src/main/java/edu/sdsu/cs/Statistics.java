@@ -18,6 +18,7 @@ class Statistics
             if (line == null) break;
             ProcessLine(line);
         } while (line != null);
+        reader.close();
     }
     private void ProcessToken(String token)
     {
@@ -100,16 +101,7 @@ class Statistics
     }
     protected int getInsensitiveCountOfMostFrequentlyOccuringToken() {
         if (!isStandardized) Standardize();
-        int count = 0;
-        int occurance = SensitiveTokens.get(SensitiveTokens.size() - 1).Count;
-        for (int i = SensitiveTokens.size() - 1; i > 0; i--)
-        {
-            if (SensitiveTokens.get(i).Count >= occurance)
-                count++;
-            else
-                break;
-        }
-        return count;
+        return InsensitiveTokens.get(InsensitiveTokens.size() - 1).Count;
     }
     protected List<Token> getInsensitiveTenMostFrequentlyUsedTokens() {
         if (!isStandardized) Standardize();
