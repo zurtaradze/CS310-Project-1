@@ -116,15 +116,12 @@ class Statistics
         List<Token> list = new ArrayList<>(10);
         list = InsensitiveTokens.stream().skip(InsensitiveTokens.size() - 10).limit(10).collect(Collectors.toList());
         Collections.reverse(list);
-        //for (int i = InsensitiveTokens.size() - 1; i > InsensitiveTokens.size() - 11; i--)
-        //    list.add(InsensitiveTokens.get(i));
         return list;
     }
     protected List<Token> getInsensitiveTenLeastFrequentlyUsedTokens() {
         if (!isStandardized) Standardize();
         List<Token> list = new ArrayList<>(10);
-        for (int i = 0; i < 10; i++)
-            list.add(InsensitiveTokens.get(i));
+        list = InsensitiveTokens.stream().limit(10).collect(Collectors.toList());
         return list;
     }
     protected File getFile() {
@@ -163,7 +160,6 @@ class Statistics
                 return o1.Count.compareTo(o2.Count);
             }
         });
-
         isStandardized = true;
     }
 }
