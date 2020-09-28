@@ -1,0 +1,29 @@
+Length of longest line in file:173
+Average line length:26.83
+Number of unique space-delineated tokens (case-sensitive):39
+Number of unique space-delineated tokens (case-insensitive):39
+Number of all space-delineated tokens in file:51
+Most frequently occurring token(s):[}, {]
+Count of most frequently occurring token (case-insensitive):4
+10 most frequent tokens with their counts (case-insensitive):
+  1).Token:}, Count 4
+  2).Token:{, Count 4
+  3).Token:+, Count 3
+  4).Token:import, Count 3
+  5).Token:new, Count 2
+  6).Token:=, Count 2
+  7).Token:system.out.println(e.getmessage());, Count 1
+  8).Token:e), Count 1
+  9).Token:(exception, Count 1
+  10).Token:catch, Count 1
+10 least frequent tokens with their counts (case-sensitive):
+  1).Token:package, Count 1
+  2).Token:edu.sdsu.cs;, Count 1
+  3).Token:java.io.*;, Count 1
+  4).Token:java.text.simpledateformat;, Count 1
+  5).Token:java.util.calendar;, Count 1
+  6).Token://, Count 1
+  7).Token:author:, Count 1
+  8).Token:tatia, Count 1
+  9).Token:sebiskveradze, Count 1
+  10).Token:public, Count 1
