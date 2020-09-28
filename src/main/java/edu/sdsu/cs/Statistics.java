@@ -2,8 +2,10 @@ package edu.sdsu.cs;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 class Statistics
 {
@@ -112,8 +114,10 @@ class Statistics
     protected List<Token> getInsensitiveTenMostFrequentlyUsedTokens() {
         if (!isStandardized) Standardize();
         List<Token> list = new ArrayList<>(10);
-        for (int i = InsensitiveTokens.size() - 1; i > InsensitiveTokens.size() - 11; i--)
-            list.add(InsensitiveTokens.get(i));
+        list = InsensitiveTokens.stream().skip(InsensitiveTokens.size() - 10).limit(10).collect(Collectors.toList());
+        Collections.reverse(list);
+        //for (int i = InsensitiveTokens.size() - 1; i > InsensitiveTokens.size() - 11; i--)
+        //    list.add(InsensitiveTokens.get(i));
         return list;
     }
     protected List<Token> getInsensitiveTenLeastFrequentlyUsedTokens() {

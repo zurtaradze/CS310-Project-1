@@ -38,7 +38,7 @@ public class App
                 // TODO: Log Exception
             }
         }
-        
+
         // TODO all these data should be saved in corresponding files
         Statistics s = stats.poll();
         System.out.println("Length of the longest line: " + s.getLengthOfLongestLine());
