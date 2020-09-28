@@ -2,6 +2,7 @@ package edu.sdsu.cs;
 
 import java.io.File;
 import java.util.*;
+import static edu.sdsu.cs.ServiceProvider.*;
 
 public class FileHandler
 {
@@ -40,11 +41,6 @@ public class FileHandler
         else
             Enqueue(file);
     }
-
-    private boolean HasDesiredExtension(File f) {
-        return  f.getPath().endsWith(".java") || f.getPath().endsWith(".txt");
-    }
-
     protected boolean hasFiles()
     {
         return !files.isEmpty();
