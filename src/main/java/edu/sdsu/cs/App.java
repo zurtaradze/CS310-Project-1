@@ -10,6 +10,8 @@ import static edu.sdsu.cs.ServiceProvider.*;
  * Main Driving Program
  *
  * Students: Tatia Sebiskveradze, Zurab Kavtaradze
+ * Course: CS310
+ * Date: 09.28.2020
  */
 public class App 
 {

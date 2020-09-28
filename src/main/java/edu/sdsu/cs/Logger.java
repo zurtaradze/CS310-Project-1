@@ -3,6 +3,7 @@ import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+// Author: Tatia Sebiskveradze
 public class Logger
 {
     protected static void Log(Exception ex)

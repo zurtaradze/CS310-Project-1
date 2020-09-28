@@ -7,6 +7,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+// Author: Zurab Kavtaradze
 class Statistics
 {
     protected void ProcessFile(File file) throws IOException {
