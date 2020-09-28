@@ -19,10 +19,17 @@ public class App
     {
         FileHandler handler = new FileHandler();
 
-        if(CheckIfPathIsProvided(args))
-            handler.Populate(args);
-        else
-            handler.Populate(DefaultPath);
+        try
+        {
+            if(CheckIfPathIsProvided(args))
+                handler.Populate(args);
+            else
+                handler.Populate(DefaultPath);
+        }
+        catch(Exception ex)
+        {
+            //TODO
+        }
 
         Queue<Statistics> stats = new LinkedList<>();
         while (handler.hasFiles())
@@ -44,7 +51,8 @@ public class App
         {
             try
             {
-                WriteToFile(stats.poll());
+                Statistics s = stats.poll();
+                WriteToFile(s);
             }
             catch (Exception ex)
             {

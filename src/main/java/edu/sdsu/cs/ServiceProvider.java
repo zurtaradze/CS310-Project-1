@@ -1,6 +1,8 @@
 package edu.sdsu.cs;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.attribute.FileAttribute;
 import java.util.List;
 
 class ServiceProvider
@@ -21,10 +23,15 @@ class ServiceProvider
     }
 
     protected static void WriteToFile(Statistics statistics) throws IOException {
-        String path = statistics.getFile().getPath().endsWith(JavaExtension)
-                ? statistics.getFile().getPath().replaceAll(JavaExtension, StatisticsExtension)
-                : statistics.getFile().getPath().replaceAll(TextExtension, StatisticsExtension);
+        String path = null;
+        if (statistics.getFile().getAbsolutePath().endsWith(JavaExtension))
+            path = replaceLast(statistics.getFile().getAbsolutePath(), JavaExtension, StatisticsExtension);
+        else if (statistics.getFile().getAbsolutePath().endsWith(TextExtension))
+            path = replaceLast(statistics.getFile().getAbsolutePath(), TextExtension, StatisticsExtension);
+        else
+            return;
 
+        boolean s = new File(path).exists();
         FileWriter writer = new FileWriter(path, false);
 
         String data = String.format("%20s:%d" , "Length of longest line in file" , statistics.getLengthOfLongestLine())
@@ -37,7 +44,6 @@ class ServiceProvider
                     .concat(String.format("%20s:%s" , "\n10 most frequent tokens with their counts (case-insensitive)" , GetFormatedString(statistics.getInsensitiveTenMostFrequentlyUsedTokens())))
                     .concat(String.format("%20s:%s" , "\n10 least frequent tokens with their counts (case-sensitive)" , GetFormatedString(statistics.getInsensitiveTenLeastFrequentlyUsedTokens())));
 
-        System.out.println(data);
         writer.write(data);
 
         writer.close();
@@ -50,5 +56,16 @@ class ServiceProvider
         for (Token tkn : list)
             sb.append("\n  "+ count++ + ")." + "Token:" + tkn.Token + ", Count " + tkn.Count);
         return sb.toString();
+    }
+
+    public static String replaceLast(String string, String toReplace, String replacement) {
+        int pos = string.lastIndexOf(toReplace);
+        if (pos > -1) {
+            return string.substring(0, pos)
+                    + replacement
+                    + string.substring(pos + toReplace.length());
+        } else {
+            return string;
+        }
     }
 }

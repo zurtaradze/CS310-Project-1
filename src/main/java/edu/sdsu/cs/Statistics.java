@@ -22,6 +22,8 @@ class Statistics
     }
     private void ProcessToken(String token)
     {
+        if (token.equals(""))
+            return;
         NumberOfAllSpaceDelimitedTokens++;
         if (!InsensitiveTokens.contains(new Token(token.toLowerCase())))
         {
@@ -57,7 +59,7 @@ class Statistics
         if (line.length() > LengthOfLongestLine)
             LengthOfLongestLine = line.length();
 
-        String[] tokens = line.split(" ");
+        String[] tokens = line.split("\\s+");
 
         for (String token : tokens)
             ProcessToken(token);
