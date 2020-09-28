@@ -18,7 +18,6 @@ public class App
     public static void main( String[] args )
     {
         FileHandler handler = new FileHandler();
-
         try
         {
             if(CheckIfPathIsProvided(args))
@@ -28,7 +27,7 @@ public class App
         }
         catch(Exception ex)
         {
-            //TODO
+            Logger.Log(ex);
         }
 
         Queue<Statistics> stats = new LinkedList<>();
@@ -38,12 +37,11 @@ public class App
             try
             {
                 statistics.ProcessFile(handler.Dequeue());
-                statistics.Standardize();
                 stats.add(statistics);
             }
             catch (IOException ex)
             {
-                // TODO: Log Exception
+                Logger.Log(ex);
             }
         }
 
@@ -56,7 +54,7 @@ public class App
             }
             catch (Exception ex)
             {
-                System.out.println(ex.getMessage());
+                Logger.Log(ex);
             }
         }
     }

@@ -107,6 +107,8 @@ class Statistics
     }
     protected List<Token> getInsensitiveTenMostFrequentlyUsedTokens() {
         if (!isStandardized) Standardize();
+        if (InsensitiveTokens.size() < 10)
+            return  InsensitiveTokens;
         List<Token> list = new ArrayList<>(10);
         list = InsensitiveTokens.stream().skip(InsensitiveTokens.size() - 10).limit(10).collect(Collectors.toList());
         Collections.reverse(list);
@@ -114,6 +116,8 @@ class Statistics
     }
     protected List<Token> getInsensitiveTenLeastFrequentlyUsedTokens() {
         if (!isStandardized) Standardize();
+        if (InsensitiveTokens.size() < 10)
+            return  InsensitiveTokens;
         List<Token> list = new ArrayList<>(10);
         list = InsensitiveTokens.stream().limit(10).collect(Collectors.toList());
         return list;
